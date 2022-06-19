@@ -1,9 +1,10 @@
-GET http://localhost:3000/users
+GET http://localhost:5000/users
 
 ###
-POST http://localhost:3000/users
+POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-  "name":"react"
+  "username":"jack",
+  "pwd":"123456"
 }

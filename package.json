@@ -23,7 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
-    "mock": "json-server __json_server_mock__/db.json --watch --port 3001"
+    "mock": "json-server __json_server_mock__/db.json --watch --port 5000 --middlewares __json_server_mock__/middleware.js"
   },
   "eslintConfig": {
     "extends": [
@@ -47,11 +47,15 @@
   "devDependencies": {
     "eslint-config-prettier": "^8.5.0",
     "husky": "^8.0.1",
-    "json-server": "^0.17.0",
+    "jira-dev-tool": "^1.7.61",
+    "json-server": "^0.16.3",
     "lint-staged": "^12.4.2",
     "prettier": "^2.2.1"
   },
   "lint-staged": {
     "*.{js,css,md,ts,tsx}": "prettier --write"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
