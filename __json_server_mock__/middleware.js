@@ -1,5 +1,3 @@
-const { log } = require("console");
-
 /*
  * @Description:
  * @file name: File name
@@ -7,7 +5,7 @@ const { log } = require("console");
  * @Author: Joe
  * @Date: 2022-06-03 14:54:30
  * @LastEditors: Joe
- * @LastEditTime: 2022-06-19 22:25:05
+ * @LastEditTime: 2022-09-19 22:21:15
  */
 module.exports = (req, res, next) => {
   console.log(req.path);

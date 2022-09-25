@@ -5,24 +5,13 @@
  * @Author: Joe
  * @Date: 2022-05-25 14:25:42
  * @LastEditors: Joe
- * @LastEditTime: 2022-09-19 23:00:11
+ * @LastEditTime: 2022-09-25 18:02:13
  */
+import { useAuth } from "context/auth_context";
 import React from "react";
-const baseUrl = process.env.REACT_APP_API_URL;
 
-export default function Login() {
-  const login = (param: { username: string; password: string }) => {
-    fetch(`${baseUrl}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(param),
-    }).then(async (response) => {
-      if (response.ok) {
-      }
-    });
-  };
+export default function LoginScreen() {
+  const { login } = useAuth();
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const username = (event.currentTarget.elements[0] as HTMLInputElement)
@@ -41,7 +30,7 @@ export default function Login() {
         <label htmlFor="password">密码</label>
         <input id="password" type="password" />
       </div>
-      <button type="submit">注册</button>
+      <button type="submit">登录</button>
     </form>
   );
 }

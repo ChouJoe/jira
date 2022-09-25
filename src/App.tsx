@@ -5,20 +5,24 @@
  * @Author: Joe
  * @Date: 2022-05-23 15:46:44
  * @LastEditors: Joe
- * @LastEditTime: 2022-06-03 14:52:30
+ * @LastEditTime: 2022-09-25 18:08:12
  */
 import React from "react";
-import logo from "./logo.svg";
+
 import "./App.css";
-import ProjectList from "screens/project-list";
-import ArrayTypeTest from "screens/array-type-test";
-import Login from "App.test";
+
+import { useAuth } from "context/auth_context";
+import { AuthenticatedApp } from "authenticated-app";
+import { UnAuthenticatedApp } from "unauthenticated-app";
 function App() {
+  const { user } = useAuth();
   return (
     <div className="App">
-      {/* <ProjectList></ProjectList> */}
-      {/* <ArrayTypeTest></ArrayTypeTest> */}
-      <Login></Login>
+      {user ? (
+        <AuthenticatedApp></AuthenticatedApp>
+      ) : (
+        <UnAuthenticatedApp></UnAuthenticatedApp>
+      )}
     </div>
   );
 }

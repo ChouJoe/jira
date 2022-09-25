@@ -5,7 +5,7 @@
  * @Author: Joe
  * @Date: 2022-05-25 14:25:42
  * @LastEditors: Joe
- * @LastEditTime: 2022-06-19 22:21:01
+ * @LastEditTime: 2022-09-25 13:05:27
  */
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -13,13 +13,24 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { loadDevTools } from "jira-dev-tool";
+import { AppProviders } from "context";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+// root.render(
+//   <React.StrictMode>
+//     <AppProviders>
+//       <App />
+//     </AppProviders>
+
+//   </React.StrictMode>
+// )
 loadDevTools(() =>
   root.render(
     <React.StrictMode>
-      <App />
+      <AppProviders>
+        <App />
+      </AppProviders>
     </React.StrictMode>
   )
 );

@@ -3,33 +3,22 @@
  * @file name: File name
  * @version:
  * @Author: Joe
- * @Date: 2022-05-25 14:25:42
+ * @Date: 2022-09-25 17:55:26
  * @LastEditors: Joe
- * @LastEditTime: 2022-09-19 23:00:11
+ * @LastEditTime: 2022-09-25 18:02:04
  */
+import { useAuth } from "context/auth_context";
 import React from "react";
-const baseUrl = process.env.REACT_APP_API_URL;
 
-export default function Login() {
-  const login = (param: { username: string; password: string }) => {
-    fetch(`${baseUrl}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(param),
-    }).then(async (response) => {
-      if (response.ok) {
-      }
-    });
-  };
+export default function RegisterScreen() {
+  const { register } = useAuth();
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const username = (event.currentTarget.elements[0] as HTMLInputElement)
       .value;
     const password = (event.currentTarget.elements[1] as HTMLInputElement)
       .value;
-    login({ username, password });
+    register({ username, password });
   };
   return (
     <form onSubmit={submitHandler}>

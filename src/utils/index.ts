@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
  * @Author: Joe
  * @Date: 2022-05-30 16:15:22
  * @LastEditors: Joe
- * @LastEditTime: 2022-06-02 20:15:16
+ * @LastEditTime: 2022-09-19 23:23:33
  */
 export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 export const cleanObject = (object: object) => {
@@ -27,6 +27,7 @@ export const useMount = (callback: () => void) => {
 };
 export const useDebounce = <T>(value: T, delay?: number): T => {
   const [prevalue, setValue] = useState(value);
+  console.log("pre", prevalue);
   useEffect(() => {
     let timeout = setTimeout(() => {
       setValue(value);

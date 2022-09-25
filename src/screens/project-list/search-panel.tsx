@@ -5,7 +5,7 @@
  * @Author: Joe
  * @Date: 2022-05-29 21:12:13
  * @LastEditors: Joe
- * @LastEditTime: 2022-06-01 16:54:46
+ * @LastEditTime: 2022-09-20 22:22:05
  */
 import React from "react";
 export interface User {
@@ -14,6 +14,7 @@ export interface User {
   personId: string;
   organization: string;
   created: string;
+  token: string;
 }
 interface SearchPanelParam {
   users: User[];
