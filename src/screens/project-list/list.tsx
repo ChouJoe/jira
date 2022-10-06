@@ -5,13 +5,16 @@
  * @Author: Joe
  * @Date: 2022-05-29 21:12:00
  * @LastEditors: Joe
- * @LastEditTime: 2022-06-01 16:54:55
+ * @LastEditTime: 2022-10-05 21:48:32
  */
+import { Table } from "antd";
 import React from "react";
 import { User } from "./search-panel";
+
 interface Project {
   name: string;
   personId: string;
+  id: string;
 }
 interface ListProps {
   list: Project[];
@@ -19,24 +22,27 @@ interface ListProps {
 }
 export default function List({ list, users }: ListProps) {
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>项目</th>
-          <th>负责人</th>
-        </tr>
-      </thead>
-      <tbody>
-        {list.map((project) => (
-          <tr key={project.personId}>
-            <td>{project.name}</td>
-            <td>
-              {users.find((user) => user.id === project.personId)?.name ||
-                "unknow"}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <Table
+      pagination={false}
+      dataSource={list}
+      columns={[
+        {
+          title: "项目",
+          dataIndex: "name",
+          sorter: (a, b) => a.name.localeCompare(b.name),
+        },
+        {
+          title: "负责人",
+          render(value, project) {
+            return (
+              <span>
+                {users.find((user) => user.id === project.personId)?.name ||
+                  "unknow"}
+              </span>
+            );
+          },
+        },
+      ]}
+    ></Table>
   );
 }

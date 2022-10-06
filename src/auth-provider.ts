@@ -5,11 +5,13 @@
  * @Author: Joe
  * @Date: 2022-09-20 22:20:23
  * @LastEditors: Joe
- * @LastEditTime: 2022-09-25 17:43:29
+ * @LastEditTime: 2022-10-05 17:53:24
  */
 import { User } from "screens/project-list/search-panel";
+import { http } from "utils/http";
 const baseUrl = process.env.REACT_APP_API_URL;
 const localStroageKey = "__auth_provider_token__";
+
 export const getToken = () => window.localStorage.getItem(localStroageKey);
 export const handleUserResponse = ({ user }: { user: User }) => {
   window.localStorage.setItem(localStroageKey, user.token);
@@ -17,34 +19,32 @@ export const handleUserResponse = ({ user }: { user: User }) => {
 };
 
 export const login = (data: { username: string; password: string }) => {
-  return fetch(`${baseUrl}/login`, {
+  return http("login", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(async (response) => {
-    if (response.ok) {
-      return handleUserResponse(await response.json());
-    } else {
-      throw Promise.reject(await response.json());
-    }
-  });
+    headers: { "Content-type": "application/json" },
+    data,
+  })
+    .then((data) => {
+      return handleUserResponse(data);
+    })
+    .catch((err) => {
+      return Promise.reject(err);
+    });
 };
 export const register = (data: { username: string; password: string }) => {
-  return fetch(`${baseUrl}/register`, {
+  return http(`register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
-  }).then(async (response) => {
-    if (response.ok) {
-      return handleUserResponse(await response.json());
-    } else {
-      return Promise.reject(await response.json());
-    }
-  });
+    data,
+  })
+    .then((data) => {
+      return handleUserResponse(data);
+    })
+    .catch((err) => {
+      return Promise.reject(err);
+    });
 };
 export const logout = async () =>
   window.localStorage.removeItem(localStroageKey);

@@ -5,7 +5,7 @@
  * @Author: Joe
  * @Date: 2022-05-29 21:10:58
  * @LastEditors: Joe
- * @LastEditTime: 2022-09-19 16:40:46
+ * @LastEditTime: 2022-10-05 17:41:30
  */
 import React from "react";
 import { useState, useEffect } from "react";
@@ -15,7 +15,8 @@ import { cleanObject } from "utils";
 import SearchPanel from "./search-panel";
 import { useMount } from "utils";
 import { useDebounce } from "utils";
-const baseUrl = process.env.REACT_APP_API_URL;
+import { useHttp } from "utils/http";
+
 export default function ProjectList() {
   const [users, setUsers] = useState([]);
   const [param, setParam] = useState({
@@ -24,21 +25,12 @@ export default function ProjectList() {
   });
   const [list, setList] = useState([]);
   const debounceParam = useDebounce(param, 1000);
+  const client = useHttp();
   useEffect(() => {
-    fetch(
-      `${baseUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`
-    ).then(async (response) => {
-      if (response.ok) {
-        setList(await response.json());
-      }
-    });
+    client(`projects`, { data: cleanObject(debounceParam) }).then(setList);
   }, [debounceParam]);
   useMount(() => {
-    fetch(`${baseUrl}/users`).then(async (response) => {
-      if (response.ok) {
-        setUsers(await response.json());
-      }
-    });
+    client("users").then(setUsers);
   });
   return (
     <div>

@@ -5,8 +5,9 @@
  * @Author: Joe
  * @Date: 2022-05-29 21:12:13
  * @LastEditors: Joe
- * @LastEditTime: 2022-09-20 22:22:05
+ * @LastEditTime: 2022-10-05 21:50:49
  */
+import { Input, Select } from "antd";
 import React from "react";
 export interface User {
   id: string;
@@ -32,26 +33,26 @@ export default function SearchPanel({
   return (
     <form>
       <div>
-        <input
+        <Input
           type="text"
           value={param.name}
           onChange={(evt) => {
             setParam({ ...param, name: evt.target.value });
           }}
         />
-        <select
+        <Select
           value={param.personId}
-          onChange={(evt) => {
-            setParam({ ...param, personId: evt.target.value });
+          onChange={(value) => {
+            setParam({ ...param, personId: value });
           }}
         >
-          <option value={""}>负责人</option>
+          <Select.Option value={""}>负责人</Select.Option>
           {users.map((e) => (
-            <option key={e.id} value={e.id}>
+            <Select.Option key={e.id} value={e.id}>
               {e.name}
-            </option>
+            </Select.Option>
           ))}
-        </select>
+        </Select>
       </div>
     </form>
   );
