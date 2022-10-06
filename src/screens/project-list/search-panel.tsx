@@ -1,13 +1,6 @@
-/*
- * @Description:
- * @file name: File name
- * @version:
- * @Author: Joe
- * @Date: 2022-05-29 21:12:13
- * @LastEditors: Joe
- * @LastEditTime: 2022-10-05 21:50:49
- */
-import { Input, Select } from "antd";
+/* @jsxImportSource @emotion/react */
+import { jsx } from "@emotion/react";
+import { Form, Input, Select } from "antd";
 import React from "react";
 export interface User {
   id: string;
@@ -31,15 +24,18 @@ export default function SearchPanel({
   setParam,
 }: SearchPanelParam) {
   return (
-    <form>
-      <div>
+    <Form layout="inline" css={{ marginBottom: "2rem" }}>
+      <Form.Item>
         <Input
+          placeholder="项目名"
           type="text"
           value={param.name}
           onChange={(evt) => {
             setParam({ ...param, name: evt.target.value });
           }}
         />
+      </Form.Item>
+      <Form.Item>
         <Select
           value={param.personId}
           onChange={(value) => {
@@ -53,7 +49,7 @@ export default function SearchPanel({
             </Select.Option>
           ))}
         </Select>
-      </div>
-    </form>
+      </Form.Item>
+    </Form>
   );
 }
