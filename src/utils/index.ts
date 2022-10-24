@@ -7,14 +7,16 @@ import { useEffect, useState } from "react";
  * @Author: Joe
  * @Date: 2022-05-30 16:15:22
  * @LastEditors: Joe
- * @LastEditTime: 2022-09-19 23:23:33
+ * @LastEditTime: 2022-10-07 12:47:25
  */
 export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
+export const isVoid = (value: unknown) =>
+  value === undefined || value === null || value === "";
 export const cleanObject = (object: object) => {
   let new_obj = { ...object };
   Object.keys(new_obj).forEach((key) => {
     let value = new_obj[key];
-    if (isFalsy(value)) {
+    if (isVoid(value)) {
       delete new_obj[key];
     }
   });
@@ -23,6 +25,7 @@ export const cleanObject = (object: object) => {
 export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback();
+    //eslint-disable-next-line
   }, []);
 };
 export const useDebounce = <T>(value: T, delay?: number): T => {

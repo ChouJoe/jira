@@ -5,7 +5,7 @@
  * @Author: Joe
  * @Date: 2022-09-25 17:55:09
  * @LastEditors: Joe
- * @LastEditTime: 2022-10-06 12:55:30
+ * @LastEditTime: 2022-10-07 12:45:19
  */
 import React, { useState } from "react";
 import LoginScreen from "./login";
@@ -29,9 +29,9 @@ export const UnAuthenticatedApp = () => {
           <RegisterScreen></RegisterScreen>
         )}
         <Divider></Divider>
-        <a onClick={() => setRegister(!register)}>
+        <Button type={"link"} onClick={() => setRegister(!register)}>
           {!register ? "已有账号，直接登录" : "注册账号"}
-        </a>
+        </Button>
       </ShadowCard>
     </Container>
   );

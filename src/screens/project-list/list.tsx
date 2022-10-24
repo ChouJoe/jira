@@ -5,9 +5,9 @@
  * @Author: Joe
  * @Date: 2022-05-29 21:12:00
  * @LastEditors: Joe
- * @LastEditTime: 2022-10-06 22:16:21
+ * @LastEditTime: 2022-10-16 21:08:51
  */
-import { Table } from "antd";
+import { Table, TableProps } from "antd";
 import dayjs from "dayjs";
 import React from "react";
 import { User } from "./search-panel";
@@ -20,15 +20,14 @@ interface Project {
   organization: string;
   created: number;
 }
-interface ListProps {
-  list: Project[];
+interface ListProps extends TableProps<Project> {
   users: User[];
 }
-export default function List({ list, users }: ListProps) {
+export default function List({ users, ...props }: ListProps) {
   return (
     <Table
+      rowKey={"id"}
       pagination={false}
-      dataSource={list}
       columns={[
         {
           title: "项目",
@@ -63,6 +62,7 @@ export default function List({ list, users }: ListProps) {
           },
         },
       ]}
+      {...props}
     ></Table>
   );
 }
