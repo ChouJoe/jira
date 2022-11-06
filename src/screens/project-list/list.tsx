@@ -5,14 +5,14 @@
  * @Author: Joe
  * @Date: 2022-05-29 21:12:00
  * @LastEditors: Joe
- * @LastEditTime: 2022-10-16 21:08:51
+ * @LastEditTime: 2022-10-24 22:41:54
  */
 import { Table, TableProps } from "antd";
 import dayjs from "dayjs";
 import React from "react";
 import { User } from "./search-panel";
 
-interface Project {
+export interface Project {
   name: string;
   personId: string;
   id: string;

@@ -5,16 +5,24 @@
  * @Author: Joe
  * @Date: 2022-09-25 17:55:26
  * @LastEditors: Joe
- * @LastEditTime: 2022-10-06 12:56:14
+ * @LastEditTime: 2022-11-06 21:02:00
  */
 import { useAuth } from "context/auth_context";
 import React from "react";
 import { Form, Input, Button } from "antd";
 import { LongButton } from "unauthenticated-app";
-export default function RegisterScreen() {
+import { useAsync } from "utils/use-async";
+export default function RegisterScreen({
+  onError,
+}: {
+  onError: (error: Error) => void;
+}) {
   const { register } = useAuth();
+  const { run, isLoading } = useAsync(undefined, { throwError: true });
   const submitHandler = (values: { username: string; password: string }) => {
-    register(values);
+    run(register(values)).catch((e) => {
+      onError(e);
+    });
   };
   return (
     <Form onFinish={submitHandler}>
@@ -31,7 +39,7 @@ export default function RegisterScreen() {
         <Input placeholder="密码" id={"password"} type={"password"} />
       </Form.Item>
       <Form.Item>
-        <LongButton htmlType="submit" type="primary">
+        <LongButton loading={isLoading} htmlType="submit" type="primary">
           注册
         </LongButton>
       </Form.Item>
